@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Chat</title>
+    <title>Lecture 4 - Chat</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -9,16 +9,30 @@
   </head>
 
   <body>
-   <nav>
-    <div class="nav-wrapper">
-      <a href="<%= root_path %>" class="brand-logo">Simplechat</a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a href="sass.html">Sass</a></li>
-        <li><a href="badges.html">Components</a></li>
-        <li><a href="collapsible.html">JavaScript</a></li>
+    <nav class="navbar navbar-light bg-faded navbar-toggleable-md">
+      <a class="navbar-brand" href="/">Navbar</a>
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class='nav-item'>
+          <% if current_user %>
+            <%= current_user %>
+            <%= link_to "Logout", logout_path%>
+          <% else %>
+            <%= link_to 'Login', login_path(:username => 'test')%>
+          <% end %>  
+        </li>
+             
       </ul>
+      <form class="form-inline float-xs-right">
+        <input class="form-control" type="text" placeholder="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </nav>
+    <div class="container">
+      <%= flash_messages %>
+      <%= yield %>
     </div>
-  </nav>
-    <%= yield %>
   </body>
 </html>
